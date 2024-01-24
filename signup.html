@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>plantLyf - SIGNUP</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1 id="mainheading">Welcome to <span style="">plantLyf</span></h1>
+      <form action="" method="post">
+        <div id="signin">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Enter the username"
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter the email"
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter the password"
+          />
+          <button type="click" id="signup">Signup</button>
+        </div>
+      </form>
+      <div>
+        <button type="button" id="signin-link">Already registered?</button>
+      </div>
+    </div>
+  </body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import {
+      getDatabase,
+      set,
+      ref,
+    } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+    } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA-Jmt9EE1gMo0V5nCYcvtpqA9-o4FX1ng",
+      authDomain: "plantlyf-527c2.firebaseapp.com",
+      databaseURL: "https://plantlyf-527c2-default-rtdb.firebaseio.com",
+      projectId: "plantlyf-527c2",
+      storageBucket: "plantlyf-527c2.appspot.com",
+      messagingSenderId: "350605301484",
+      appId: "1:350605301484:web:afad6570ea2b3468ac77c9",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    const signup = document.querySelector("#signup");
+    const signinLink = document.querySelector("#signin-link");
+
+    signup.addEventListener("click", (e) => {
+      e.preventDefault();
+      let username = document.querySelector("#username").value;
+      let email = document.querySelector("#email").value;
+      let password = document.querySelector("#password").value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          //add data to real-time db
+          set(ref(database, "users/" + user.uid), {
+            username: username,
+            email: email,
+            // never save password to the db
+          });
+          //redirect to another page
+          console.log("created");
+          window.location.href = "./pages/main.html";
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+        });
+    });
+
+    signinLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log("inside signin page");
+      window.location.href = "./pages/signin.html";
+    });
+
+  </script>
+</html>
