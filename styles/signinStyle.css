@@ -1,0 +1,74 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+#container {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#mainheading {
+  text-align: center;
+  color: #333;
+}
+
+#mainheading span {
+  color: #4caf50;
+}
+
+form {
+  margin-top: 20px;
+}
+
+#signinHeading {
+  text-align: center;
+  color: #333;
+}
+
+#signin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#signin-link {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #4caf50;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#signin-link:hover {
+  color: #45a049;
+}

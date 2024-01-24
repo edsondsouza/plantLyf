@@ -2,12 +2,14 @@
 <html>
   <head>
     <title>plantLyf - SIGNUP</title>
+    <link rel="stylesheet" href="./styles/signupStyle.css">
   </head>
   <body>
     <div id="container">
       <h1 id="mainheading">Welcome to <span style="">plantLyf</span></h1>
       <form action="" method="post">
-        <div id="signin">
+        <h3 id="signupHeading">SignUp</h3>
+        <div id="signup">
           <input
             type="text"
             name="username"
@@ -58,6 +60,10 @@
       appId: "1:350605301484:web:afad6570ea2b3468ac77c9",
     };
 
+    // store fb configuration in local storage
+    // Store the Firebase configuration in localStorage
+    localStorage.setItem("firebaseConfig", JSON.stringify(firebaseConfig));
+
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
@@ -97,6 +103,5 @@
       console.log("inside signin page");
       window.location.href = "./pages/signin.html";
     });
-
   </script>
 </html>
