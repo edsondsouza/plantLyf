@@ -1,0 +1,52 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d0e9c6; /* Set background color to white */
+    padding: 15px 20px; /* Increase height of the navbar */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box-shadow */
+}
+
+.headingContainer {
+    display: flex;
+    align-items: center;
+}
+
+.brandHeading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4caf50; /* Brand color */
+    margin-right: 20px;
+}
+
+.navbar {
+    display: flex;
+}
+
+.navul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navul li {
+    margin-right: 20px;
+}
+
+.navul li a {
+    text-decoration: none;
+    color: #4caf50; /* Text color */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.imagesvg {
+    cursor: pointer;
+}
