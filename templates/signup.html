@@ -1,15 +1,16 @@
+<!-- First Page - Signup and get redirected to home page -->
 <!DOCTYPE html>
 <html>
   <head>
     <title>plantLyf - SIGNUP</title>
-    <link rel="stylesheet" href="./styles/signupStyle.css">
+    <link rel="stylesheet" href="../static/css/signupStyle.css" />
   </head>
   <body>
     <div id="container">
       <h1 id="mainheading">Welcome to <span style="">plantLyf</span></h1>
       <form action="" method="post">
         <h3 id="signupHeading">SignUp</h3>
-        <div id="signup">
+        <div id="signup1">
           <input
             type="text"
             name="username"
@@ -89,7 +90,7 @@
           });
           //redirect to another page
           console.log("created");
-          window.location.href = "./pages/main.html";
+          window.location.href = "/main";
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -101,7 +102,7 @@
     signinLink.addEventListener("click", (e) => {
       e.preventDefault();
       console.log("inside signin page");
-      window.location.href = "./pages/signin.html";
+      window.location.href = "/signin";
     });
   </script>
 </html>
