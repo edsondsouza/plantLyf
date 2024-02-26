@@ -11,3 +11,6 @@
 
 ## Run the project
 - Open the terminal and run `flask run`
+
+### NOTE
+- Please create a new branch before making the pull request. 👉👉 [How to create pull request](https://opensource.com/article/19/7/create-pull-request-github) 👈👈
