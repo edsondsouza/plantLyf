@@ -8,3 +8,6 @@
 ```git clone <add-repository-link>```
 
 ![alt text](image-1.png)
+
+## Run the project
+- Open the terminal and run `flask run`
