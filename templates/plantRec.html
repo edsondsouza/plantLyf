@@ -4,8 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>plantLyf - RECOMMENDATION</title>
+    <link rel="stylesheet" href="../static/css/plantRec.css">
 </head>
 <body>
-    <h1>Plant Recommendation Page</h1>
+    <h1>Plant Prediction</h1>
+    <form action="/croprecommendation" method="post">
+        <label for="leaf_width">Leaf Width:</label>
+        <input type="text" id="leaf_width" name="leaf_width" placeholder="Enter Leaf Width" required><br><br>
+        
+        <label for="leaf_length">Leaf Length:</label>
+        <input type="text" id="leaf_length" name="leaf_length" placeholder="Enter Leaf Length" required><br><br>
+        
+        <label for="color_intensity">Color Intensity:</label>
+        <input type="text" id="color_intensity" name="color_intensity" placeholder="Enter Color Intensity" required><br><br>
+
+        <input type="submit" value="Predict">
+    </form>
+    {% if prediction %}
+    <h2>Prediction Result: {{ prediction }}</h2>
+    {% endif %}
 </body>
 </html>

@@ -4,30 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>plantLyf - HOME Page</title>
-   <link rel="stylesheet" href="{{ url_for('static', filename='css/mainPage.css') }}">
-
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/mainPage.css') }}"
+    />
   </head>
   <body>
     <div id="main-container">
-    <!-- navbar -->
-    <div class="navbar-container">
-      <div class="headingContainer">
-        <span class="brandHeading">plantLyf</span>
+      <!-- navbar -->
+      <div class="navbar-container">
+        <div class="headingContainer">
+          <span class="brandHeading">plantLyf</span>
+        </div>
+        <div class="navbar">
+          <ul class="navul">
+            <li>
+              <a href="#" class="Home"> Home </a>
+            </li>
+            <li>
+              <a href="/about" class="about"> About </a>
+            </li>
+            <li>
+              <a href="#" class="Contact"> Contact </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="navbar">
-        <ul class="navul">
-          <li>
-            <a href="#" class="Home"> Home </a>
-          </li>
-          <li>
-            <a href="#" class="about"> About </a>
-          </li>
-          <li>
-            <a href="#" class="Contact"> Contact </a>
-          </li>
-        </ul>
-      </div>
-    </div>
       <!-- buttons -->
       <div id="jump-section">
         <div id="right-section">
