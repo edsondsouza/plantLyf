@@ -50,5 +50,14 @@
       </div>
     </div>
   </body>
-  <script src="../js/main.js"></script>
+  <script>
+    const Recommendation = document.querySelector("#plant-rec");
+    Recommendation.addEventListener("click", (e) => {
+      window.location.href = "/recommendation";
+    });
+    const Detect = document.querySelector("#disease-detect");
+    Detect.addEventListener("click", (e) => {
+      window.location.href = "/disease_detection";
+    });
+  </script>
 </html>

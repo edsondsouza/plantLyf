@@ -9,14 +9,27 @@
 <body>
     <h1>Plant Prediction</h1>
     <form action="/croprecommendation" method="post">
-        <label for="leaf_width">Leaf Width:</label>
-        <input type="text" id="leaf_width" name="leaf_width" placeholder="Enter Leaf Width" required><br><br>
+        <label for="Nitrogen "> N :</label>
+        <input type="text" id="leaf_width" name="N" placeholder="Enter Nitrogen Ratio" required><br><br>
         
-        <label for="leaf_length">Leaf Length:</label>
-        <input type="text" id="leaf_length" name="leaf_length" placeholder="Enter Leaf Length" required><br><br>
+        <label for="Pos"> P :</label>
+        <input type="text" id="leaf_length" name="P" placeholder="Enter P Ratio" required><br><br>
         
-        <label for="color_intensity">Color Intensity:</label>
-        <input type="text" id="color_intensity" name="color_intensity" placeholder="Enter Color Intensity" required><br><br>
+        <label for="K"> K :</label>
+        <input type="text" id="color_intensity" name="K" placeholder="Enter N Ratio" required><br><br>
+
+        <label for="temperature"> temperature :</label>
+        <input type="text" id="temperature" name="temperature" placeholder="Enter temperature" required><br><br>
+
+        <label for="humidity"> humidity :</label>
+        <input type="text" id="humidity" name="humidity" placeholder="Enter humidity" required><br><br>
+
+
+        <label for="ph"> ph :</label>
+        <input type="text" id="ph" name="ph" placeholder="Enter ph" required><br><br>
+
+        <label for="rainfall"> rainfall :</label>
+        <input type="text" id="rainfall" name="rainfall" placeholder="Enter rainfall in mm" required><br><br>
 
         <input type="submit" value="Predict">
     </form>
