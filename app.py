@@ -46,7 +46,7 @@ def main_page():
     return render_template("/main.html")
 
 # disease detection page
-@app.route('/disease_detection')
+@app.route('/diseasedetection')
 def detection():
     return render_template('diseaseDetect.html')
 

@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>plantLyf - DETECTION</title>
-</head>
-<body>
-    <h1>Plant Disease Detection Page</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Upload Form</title>
+    <link rel="stylesheet" href="../static/css/diseaseDetect.css" />
+  </head>
+  <body>
+    <h1>Disease Detection</h1>
+    <div class="container">
+      <form action="/diseasedetection" method="post" enctype="multipart/form-data">
+        <h2>Upload Image</h2>
+        <div class="form-group">
+          <label for="image">Choose Image:</label>
+          <input type="file" id="image" name="image" accept="image/*" />
+        </div>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </div>
+  </body>
 </html>

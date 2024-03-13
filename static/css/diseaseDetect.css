@@ -5,12 +5,7 @@ body {
   padding: 0;
 }
 
-h1 {
-  text-align: center;
-  color: #333;
-}
-
-form {
+.container {
   width: 50%;
   margin: 50px auto;
   background-color: #fff;
@@ -19,20 +14,33 @@ form {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
+h1 {
+  text-align: center;
+  color: #333;
 }
 
-input[type="text"] {
-  width: calc(100% - 20px);
+h2 {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="file"] {
+  display: block;
+  width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-input[type="submit"] {
+.btn {
+  display: block;
   width: 100%;
   padding: 10px;
   background-color: #4CAF50;
@@ -43,12 +51,6 @@ input[type="submit"] {
   transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
+.btn:hover {
   background-color: #3d8d40;
-}
-
-h2 {
-  text-align: center;
-  margin-top: 20px;
-  color: #333;
 }
