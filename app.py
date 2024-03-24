@@ -1,81 +1,100 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-import firebase_admin
 import numpy as np
 import pickle
-from firebase_admin import auth 
+import cv2
+from keras.models import load_model
+
+label_map = {
+    '0': 'Healthy',
+    '1': 'Powdery',
+    '2': 'Rust',
+    # Add more entries as needed
+}
+
+global model2
+model2 = load_model("leaf_classifier.keras")
+
 app = Flask(__name__)
+
 with open("rf_model.pkl", "rb") as file:
     model = pickle.load(file)
-    
 
-# signup page
+with open("scaler.pkl", "rb") as file:
+    loaded_scaler = pickle.load(file)
+    
+    
 @app.route('/')
 def main_p():
     # Render your main page template here
     return render_template("/signup.html")
 
-# signin page
 @app.route("/signin") #here
 def signin():
+
      if request.method == "POST":
          email = request.form.get("email")
          password = request.form.get("password")
-         try:
-             user = firebase_admin.auth.sign_in_with_email_and_password(email, password)
-             # Handle sign-in success, update user data in database, redirect, etc.
-             return render_template("/main.html")
-         except firebase_admin.auth.InvalidEmailError:
-             # Handle invalid email error
-             pass
-         except firebase_admin.auth.InvalidPasswordError:
-             # Handle invalid password error
-             pass
-         except firebase_admin.auth.UserNotFoundError:
-             # Handle user not found error
-             pass
-         except firebase_admin.auth.AuthError as e:
-             # Handle other authentication errors
-             pass
+
+
+
      # Redirect to sign-in page if sign-in fails
      return render_template("/signin.html")
 
-# main page
 @app.route("/main")
 def main_page():
     # Render your main page template here
     return render_template("/main.html")
 
-# disease detection page
-@app.route('/diseasedetection')
+
+    
+@app.route('/disease_detection')
 def detection():
     return render_template('diseaseDetect.html')
 
-# crop recommendation page
+
+@app.route("/diseasedetection", methods=["POST"])
+def predict_disease():
+    if request.method == "POST":
+        if request.files:
+            image = request.files["image"].read()
+            nparr = np.frombuffer(image, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+            img = cv2.resize(img, (64, 64))
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            processed_image = img.astype("float32") / 255.0
+            processed_image = np.expand_dims(processed_image, axis=0)
+
+            pred = model2.predict(processed_image)[0].argmax()
+
+            label = label_map.get(str(pred))
+
+    return str(label)
+
+
+
 @app.route('/recommendation')
-def recommendation():
+def recomendation():
     return render_template('plantRec.html')
 
 @app.route('/croprecommendation', methods=['POST'])
-def predict():
+def predict_crops():
     if request.method == 'POST':
-        N = float(request.form['N'])
-        P = float(request.form['P'])
-        K = float(request.form['K'])
-        temperature = float(request.form['temperature'])
-        humidity = float(request.form['humidity'])
-        ph = float(request.form['ph'])
-        rainfall = float(request.form['rainfall'])
+        N = request.form['N']
+        P = request.form['P']
+        K = request.form['K']
+        temperature = request.form['temperature']
+        humidity = request.form['humidity']
+        ph = request.form['ph']
+        rainfall = request.form['rainfall']
 
         input_data = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
-        prediction = model.predict(input_data)
+        input_data_scaled = loaded_scaler.transform(input_data)
+        prediction = model.predict(input_data_scaled)
 
-        return render_template('plantRec.html', prediction=prediction[0])
+    return render_template('plantRec.html', prediction=prediction[0])
 
 
-# about page
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
