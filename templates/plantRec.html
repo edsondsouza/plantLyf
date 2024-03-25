@@ -1,40 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>plantLyf - RECOMMENDATION</title>
-    <link rel="stylesheet" href="../static/css/plantRec.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../static/css/plantRec.css" />
+  </head>
+  <body>
     <h1>Plant Prediction</h1>
     <form action="/croprecommendation" method="post">
-        <label for="Nitrogen "> N :</label>
-        <input type="text" id="leaf_width" name="N" placeholder="Enter Nitrogen Ratio" required><br><br>
-        
-        <label for="Pos"> P :</label>
-        <input type="text" id="leaf_length" name="P" placeholder="Enter P Ratio" required><br><br>
-        
-        <label for="K"> K :</label>
-        <input type="text" id="color_intensity" name="K" placeholder="Enter N Ratio" required><br><br>
+      <label for="leaf_width"> N :</label>
+      <input
+        type="text"
+        id="leaf_width"
+        name="N"
+        placeholder="Enter Nitrogen Ratio"
+        required
+      /><br /><br />
 
-        <label for="temperature"> temperature :</label>
-        <input type="text" id="temperature" name="temperature" placeholder="Enter temperature" required><br><br>
+      <label for="leaf_length"> P :</label>
+      <input
+        type="text"
+        id="leaf_length"
+        name="P"
+        placeholder="Enter P Ratio"
+        required
+      /><br /><br />
 
-        <label for="humidity"> humidity :</label>
-        <input type="text" id="humidity" name="humidity" placeholder="Enter humidity" required><br><br>
+      <label for="color_intensity"> K :</label>
+      <input
+        type="text"
+        id="color_intensity"
+        name="K"
+        placeholder="Enter N Ratio"
+        required
+      /><br /><br />
 
+      <label for="temperature"> temperature :</label>
+      <input
+        type="text"
+        id="temperature"
+        name="temperature"
+        placeholder="Enter temperature"
+        required
+      /><br /><br />
 
-        <label for="ph"> ph :</label>
-        <input type="text" id="ph" name="ph" placeholder="Enter ph" required><br><br>
+      <label for="humidity"> humidity :</label>
+      <input
+        type="text"
+        id="humidity"
+        name="humidity"
+        placeholder="Enter humidity"
+        required
+      /><br /><br />
 
-        <label for="rainfall"> rainfall :</label>
-        <input type="text" id="rainfall" name="rainfall" placeholder="Enter rainfall in mm" required><br><br>
+      <label for="ph"> ph :</label>
+      <input
+        type="text"
+        id="ph"
+        name="ph"
+        placeholder="Enter ph"
+        required
+      /><br /><br />
 
-        <input type="submit" value="Predict">
+      <label for="rainfall"> rainfall :</label>
+      <input
+        type="text"
+        id="rainfall"
+        name="rainfall"
+        placeholder="Enter rainfall in mm"
+        required
+      /><br /><br />
+
+      <label for="rainfall"> Input any state or ask doubt : </label>
+      <input
+        type="text"
+        id="doubt"
+        name="doubt"
+        placeholder="Ask anything"
+        required
+      /><br /><br />
+
+      <input type="submit" value="Predict" />
     </form>
-    {% if prediction %}
-    <h2>Prediction Result: {{ prediction }}</h2>
-    {% endif %}
-</body>
+    <h3 class="prediction">Predicted Crop: {{ pre }}</h3>
+    <ul>
+      {% for line in prediction %}
+        <li>{{ line }}</li>
+      {% endfor %}
+    </ul>
+  </body>
 </html>

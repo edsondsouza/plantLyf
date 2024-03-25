@@ -2,17 +2,85 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import numpy as np
 import pickle
 import cv2
-from keras.models import load_model
+from keras.models  import load_model
+import google.generativeai as genai
+import re
 
-label_map = {
+GOOGLE_API_KEY = 'AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU'
+genai.configure(api_key=GOOGLE_API_KEY)
+Gmodel = genai.GenerativeModel('gemini-pro')
+
+label_map  = {
     '0': 'Healthy',
     '1': 'Powdery',
     '2': 'Rust',
-    # Add more entries as needed
+}
+
+label_map2 = {
+    '0' :   "Apple Apple scab",
+    '1' :	"Apple Black rot",
+    '2' :	"Apple Cedar apple rust",
+    '3' :	"Apple healthy",
+    '4' :	"Bacterial leaf blight in rice leaf",
+    '5' :	"Blight in corn Leaf",
+    '6' :	"Blueberry healthy",
+    '7' :	"Brown spot in rice leaf",
+    '8' :	"Cercospora leaf spot",
+    '9' :   "Cherry (including sour) Powdery mildew",
+    '10':	"Cherry (including_sour) healthy",
+    '11':	"Common Rust in corn Leaf",
+    '12':	"Corn (maize) healthy",
+    '13':	"Garlic",
+    '14':	"Grape Black rot",
+    '15':	"Grape Esca Black Measles",
+    '16':	"Grape Leaf blight Isariopsis Leaf Spot",
+    '17':	"Grape healthy",
+    '18':	"Gray Leaf Spot in corn Leaf",
+    '19':	"Leaf smut in rice leaf",
+    '20':	"Orange Haunglongbing Citrus greening",
+    '21':	"Peach healthy",
+    '22':	"Pepper bell Bacterial spot",
+    '23':	"Pepper bell healthy",
+    '24':	"Potato Early blight",
+    '25':	"Potato Late blight",
+    '26':	"Potato healthy",
+    '27':	"Raspberry healthy",
+    '28':	"Sogatella rice",
+    '29':	"Soybean healthy",
+    '30':	"Strawberry Leaf scorch",
+    '31':	"Strawberry healthy",
+    '32':	"Tomato Bacterial spot",
+    '33':	"Tomato Early blight",
+    '34':	"Tomato Late blight",
+    '35':	"Tomato Leaf Mold",
+    '36':	"Tomato Septoria leaf spot",
+    '37':	"Tomato Spider mites Two spotted spider mite",
+    '38':	"Tomato Target Spot",
+    '39':	"Tomato Tomato mosaic virus",
+    '40':	"Tomato healthy",
+    '41':	"algal leaf in tea",
+    '42':	"anthracnose in tea",
+    '43':	"bird eye spot in tea",
+    '44':	"brown blight in tea",
+    '45':	"cabbage looper",
+    '46':	"corn crop",
+    '47':	"ginger",
+    '48':	"healthy tea leaf",
+    '49':	"lemon canker",
+    '50':	"onion",
+    '51':	"potassium deficiency in plant",
+    '52':	"potato crop",
+    '53':	"potato hollow heart",
+    '54':	"red leaf spot in tea",
+    '55':	"tomato canker"
 }
 
 global model2
 model2 = load_model("leaf_classifier.keras")
+
+
+# global model3
+# model3 = load_model("leaf_classifier2 (6).keras")
 
 app = Flask(__name__)
 
@@ -66,10 +134,12 @@ def predict_disease():
             processed_image = np.expand_dims(processed_image, axis=0)
 
             pred = model2.predict(processed_image)[0].argmax()
+            # pred2 = model3.predict(processed_image)[0].argmax()
 
             label = label_map.get(str(pred))
+            # label2 = label_map2.get(str(pred2))
 
-    return str(label)
+    return render_template('diseaseDetect.html',prediction1=label)
 
 
 
@@ -79,21 +149,33 @@ def recomendation():
 
 @app.route('/croprecommendation', methods=['POST'])
 def predict_crops():
-    if request.method == 'POST':
-        N = request.form['N']
-        P = request.form['P']
-        K = request.form['K']
-        temperature = request.form['temperature']
-        humidity = request.form['humidity']
-        ph = request.form['ph']
-        rainfall = request.form['rainfall']
+  if request.method == 'POST':
+    N = float(request.form['N'])
+    P = float(request.form['P'])
+    K = float(request.form['K'])
+    temperature = float(request.form['temperature'])
+    humidity = float(request.form['humidity'])
+    ph = float(request.form['ph'])
+    rainfall = float(request.form['rainfall'])
+    user_text = request.form['doubt']
 
-        input_data = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
-        input_data_scaled = loaded_scaler.transform(input_data)
-        prediction = model.predict(input_data_scaled)
+    prompt = f"Based on given soil nutrients and environmental conditions, suggest suitable crops:\n\n Soil Nutrients: N={N}, P={P}, K={K}\n Environmental Conditions: Temperature={temperature}, Humidity={humidity}, pH={ph}, Rainfall={rainfall} and also have doubt {user_text}"
+    response = Gmodel.generate_content(prompt)
 
-    return render_template('plantRec.html', prediction=prediction[0])
+    # Split the response text into a list of lines
+    lines = response.text.splitlines()
 
+    # Clean each line using regular expression
+    clean_lines = [re.sub(r"[^\w\s\!\?\.\,]", "", line) for line in lines]
+    print(clean_lines)
+
+    input_data = np.array([[N, P, K, temperature, humidity, ph, rainfall]])
+    input_data_scaled = loaded_scaler.transform(input_data)
+    prediction = model.predict(input_data_scaled)
+    # Extract the predicted crop from the list (assuming it has only one element)
+    predicted_crop = prediction[0]
+
+    return render_template('plantRec.html', prediction=clean_lines, pre=predicted_crop)
 
 
 if __name__ == "__main__":

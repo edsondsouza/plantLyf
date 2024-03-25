@@ -52,3 +52,7 @@ h2 {
   margin-top: 20px;
   color: #333;
 }
+
+.prediction {
+  text-align: center;
+}

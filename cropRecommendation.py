@@ -30,5 +30,3 @@ with open("rf_model.pkl", "wb") as file:
 
 with open("scaler.pkl", "wb") as file:
     pickle.dump(scaler, file)
-
-
