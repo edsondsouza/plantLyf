@@ -16,13 +16,31 @@
       >
         <h2>Upload Image</h2>
         <div class="form-group">
+          <!-- image -->
           <label for="image">Choose Image:</label>
           <input type="file" id="image" name="image" accept="image/*" />
+
+          <!-- symptoms -->
+          <label for="text">Symptoms: </label>
+          <input type="text" id="symptoms" name="symptoms" />
+
+          <!-- crop name -->
+          <label for="text">Crop: </label>
+          <input type="text" id="crop" name="crop" />
         </div>
         <button type="submit" class="btn">Submit</button>
       </form>
     </div>
-    <h3>CNN model 1 prediction : {{prediction1}}</h3> <br> <br>
-    <h3>CNN model 2 prediction not a perfect: {{ prediction2 }}</h3>
+    <h3>CNN model 1 prediction : {{prediction1}}</h3>
+    <br />
+    <!-- <h3>CNN model 2 prediction : {{ prediction2 }}</h3> -->
+    <!--not perfect-->
+    <h3>Large Language Model:</h3>
+    <br />
+    <ul>
+      {% for line in diseaseprediction %}
+      <li>{{ line }}</li>
+      {% endfor %}
+    </ul>
   </body>
 </html>

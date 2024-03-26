@@ -5,10 +5,13 @@ import cv2
 from keras.models  import load_model
 import google.generativeai as genai
 import re
+import tensorflow as tf
 
 GOOGLE_API_KEY = 'AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU'
 genai.configure(api_key=GOOGLE_API_KEY)
 Gmodel = genai.GenerativeModel('gemini-pro')
+global clearLines
+clearLines = []
 
 label_map  = {
     '0': 'Healthy',
@@ -78,6 +81,14 @@ label_map2 = {
 global model2
 model2 = load_model("leaf_classifier.keras")
 
+# json file
+with open("model_architecture.json", "r") as json_file:
+    loaded_model_json = json_file.read()
+# loaded_mod = model_from_json(loaded_model_json)
+loaded_mod = tf.keras.models.model_from_json(loaded_model_json)
+loaded_mod.load_weights("model_weights.h5")
+loaded_mod.compile(optimizer="adam", loss='categorical_crossentropy', metrics=['accuracy'])
+
 
 # global model3
 # model3 = load_model("leaf_classifier2 (6).keras")
@@ -119,11 +130,13 @@ def main_page():
 def detection():
     return render_template('diseaseDetect.html')
 
-
 @app.route("/diseasedetection", methods=["POST"])
 def predict_disease():
     if request.method == "POST":
         if request.files:
+            symptoms = request.form.get("symptoms")
+            crop = request.form.get("crop")
+
             image = request.files["image"].read()
             nparr = np.frombuffer(image, np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
@@ -134,14 +147,24 @@ def predict_disease():
             processed_image = np.expand_dims(processed_image, axis=0)
 
             pred = model2.predict(processed_image)[0].argmax()
-            # pred2 = model3.predict(processed_image)[0].argmax()
 
+            pred2 = loaded_mod.predict(processed_image)[0].argmax()
             label = label_map.get(str(pred))
-            # label2 = label_map2.get(str(pred2))
 
-    return render_template('diseaseDetect.html',prediction1=label)
+            if label == "Healthy":
+                label2 = "Healthy"
+                clearLines = ["The plant is healthy. No disease detected."]
+            else:
+                label2 = label_map2.get(str(pred2))
+                prompt = f"Based on the symptoms {symptoms} and {label} and crop {crop} predict the disease and suggest the cure."
+                response = Gmodel.generate_content(prompt)
+                # Split the response text into a list of lines
+                lines = response.text.splitlines()
 
+                # Clean each line using regular expression
+                clearLines = [re.sub(r"[^\w\s\!\?\.\,]", "", line) for line in lines]
 
+    return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines)
 
 @app.route('/recommendation')
 def recomendation():
@@ -179,4 +202,4 @@ def predict_crops():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
