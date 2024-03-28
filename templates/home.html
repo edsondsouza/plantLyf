@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Sticky Navigation Bar</title>
+		<link rel="stylesheet" href="../static/css/home.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<!-- navigation bar -->
+		<nav>
+			<div class="nav-container">
+				<div class="logo">
+					<a href="#">PlantLyf</a>
+				</div>
+				<div class="nav-toggle" id="navToggle">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<div class="nav-links" id="navLinks">
+					<a href="#">Home</a>
+					<a href="/about">About</a>
+					<a href="/team">Team</a>
+					<a href="/github">GitHub</a>
+				</div>
+			</div>
+		</nav>
+
+		<!-- hero section -->
+		<section class="hero">
+			<div class="hero-content">
+				<div class="hero-text">
+					<h1>PlantLyf</h1>
+					<p>Your one stop to manage the crops</p>
+				</div>
+				<div class="hero-buttons">
+					<a href="/recommendation" class="btn">Crop Recommendation</a>
+					<a href="/disease_detection" class="btn">Detect Disease</a>
+				</div>
+				<div class="hero-image">
+					<img src="{{ url_for('static', filename='images/crop.jpg') }}" alt="Crop Image" />
+				</div>
+			</div>
+		</section>
+
+		<!-- Video Section -->
+		<section class="video-section">
+			<div class="video-container">
+				<video autoplay loop muted playsinline>
+					<source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4" />
+					Your browser does not support the video tag.
+				</video>
+			</div>
+		</section>
+
+		<!-- Features Section -->
+		<section class="features-section">
+			<div class="container">
+				<h2 class="section-title">Features</h2>
+				<div class="features-container">
+					<div class="feature-card">
+						<h3 class="feature-title">Feature 1</h3>
+						<p class="feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit. Nullam congue velit nec tellus ultrices, id
+							tincidunt mauris lobortis. Sed et lacus eget velit
+							maximus iaculis.
+						</p>
+					</div>
+					<div class="feature-card">
+						<h3 class="feature-title">Feature 2</h3>
+						<p class="feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit. Nullam congue velit nec tellus ultrices, id
+							tincidunt mauris lobortis. Sed et lacus eget velit
+							maximus iaculis.
+						</p>
+					</div>
+					<div class="feature-card">
+						<h3 class="feature-title">Feature 3</h3>
+						<p class="feature-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit. Nullam congue velit nec tellus ultrices, id
+							tincidunt mauris lobortis. Sed et lacus eget velit
+							maximus iaculis.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Model Accuracy Section -->
+		<section class="model-accuracy">
+			<div class="container">
+				<h2 class="section-title">Model Accuracy</h2>
+				<div class="model-container">
+					<div class="model-card">
+						<h3 class="model-title">Model 1</h3>
+						<p class="model-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit. Nullam congue velit nec tellus ultrices, id
+							tincidunt mauris lobortis. Sed et lacus eget velit
+							maximus iaculis. Donec a sapien enim. Cras molestie
+							condimentum dui, vel iaculis mauris hendrerit at.
+						</p>
+					</div>
+					<div class="model-card">
+						<h3 class="model-title">Model 2</h3>
+						<p class="model-description">
+							Lorem ipsum dolor sit amet, consectetur adipiscing
+							elit. Nullam congue velit nec tellus ultrices, id
+							tincidunt mauris lobortis. Sed et lacus eget velit
+							maximus iaculis. Donec a sapien enim. Cras molestie
+							condimentum dui, vel iaculis mauris hendrerit at.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer>
+			<div class="footer-container">
+				<div class="footer-left">
+					<p>PlantLyf</p>
+				</div>
+				<div class="footer-center">
+					<p>&copy; 2023 PlantLyf. All rights reserved.</p>
+				</div>
+				<div class="footer-right">
+					<a href="/github">GitHub</a>
+					<a href="/team">Team</a>
+				</div>
+			</div>
+		</footer>
+
+		<script src="script.js"></script>
+	</body>
+</html>

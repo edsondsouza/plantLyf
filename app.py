@@ -122,7 +122,7 @@ def signin():
 @app.route("/main")
 def main_page():
     # Render your main page template here
-    return render_template("/main.html")
+    return render_template("/home.html")
 
 
     
