@@ -1,145 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Sticky Navigation Bar</title>
-		<link rel="stylesheet" href="../static/css/home.css" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
-			rel="stylesheet"
-		/>
-	</head>
-	<body>
-		<!-- navigation bar -->
-		<nav>
-			<div class="nav-container">
-				<div class="logo">
-					<a href="#">PlantLyf</a>
-				</div>
-				<div class="nav-toggle" id="navToggle">
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-				<div class="nav-links" id="navLinks">
-					<a href="#">Home</a>
-					<a href="/about">About</a>
-					<a href="/team">Team</a>
-					<a href="/github">GitHub</a>
-				</div>
-			</div>
-		</nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sticky Navigation Bar</title>
+    <link rel="stylesheet" href="../static/css/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- navigation bar -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">
+          <a href="#">PlantLyf</a>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#">Home</a>
+          <a href="/about">About</a>
+          <a href="/team">Team</a>
+          <a href="/github">GitHub</a>
+        </div>
+      </div>
+    </nav>
 
-		<!-- hero section -->
-		<section class="hero">
-			<div class="hero-content">
-				<div class="hero-text">
-					<h1>PlantLyf</h1>
-					<p>Your one stop to manage the crops</p>
-				</div>
-				<div class="hero-buttons">
-					<a href="/recommendation" class="btn">Crop Recommendation</a>
-					<a href="/disease_detection" class="btn">Detect Disease</a>
-				</div>
-				<div class="hero-image">
-					<img src="{{ url_for('static', filename='images/crop.jpg') }}" alt="Crop Image" />
-				</div>
-			</div>
-		</section>
+    <!-- hero section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>PlantLyf</h1>
+          <p>Your <span class="orange">one stop to manage</span> the crops</p>
+          <div class="hero-buttons">
+            <a href="/recommendation" class="btn">Crop Recommendation</a>
+            <a href="/disease_detection" class="btn">Detect Disease</a>
+          </div>
+        </div>
 
-		<!-- Video Section -->
-		<section class="video-section">
-			<div class="video-container">
-				<video autoplay loop muted playsinline>
-					<source src="{{ url_for('static', filename='video/video.mp4') }}" type="video/mp4" />
-					Your browser does not support the video tag.
-				</video>
-			</div>
-		</section>
+        <div class="hero-image">
+          <img
+            src="{{ url_for('static', filename='images/crop.jpg') }}"
+            alt="Crop Image"
+          />
+        </div>
+      </div>
+    </section>
 
-		<!-- Features Section -->
-		<section class="features-section">
-			<div class="container">
-				<h2 class="section-title">Features</h2>
-				<div class="features-container">
-					<div class="feature-card">
-						<h3 class="feature-title">Feature 1</h3>
-						<p class="feature-description">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Nullam congue velit nec tellus ultrices, id
-							tincidunt mauris lobortis. Sed et lacus eget velit
-							maximus iaculis.
-						</p>
-					</div>
-					<div class="feature-card">
-						<h3 class="feature-title">Feature 2</h3>
-						<p class="feature-description">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Nullam congue velit nec tellus ultrices, id
-							tincidunt mauris lobortis. Sed et lacus eget velit
-							maximus iaculis.
-						</p>
-					</div>
-					<div class="feature-card">
-						<h3 class="feature-title">Feature 3</h3>
-						<p class="feature-description">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Nullam congue velit nec tellus ultrices, id
-							tincidunt mauris lobortis. Sed et lacus eget velit
-							maximus iaculis.
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
+    <!-- Video Section -->
+    <section class="video-section">
+      <div class="video-container">
+        <video autoplay loop muted playsinline>
+          <source
+            src="{{ url_for('static', filename='video/video.mp4') }}"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </section>
 
-		<!-- Model Accuracy Section -->
-		<section class="model-accuracy">
-			<div class="container">
-				<h2 class="section-title">Model Accuracy</h2>
-				<div class="model-container">
-					<div class="model-card">
-						<h3 class="model-title">Model 1</h3>
-						<p class="model-description">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Nullam congue velit nec tellus ultrices, id
-							tincidunt mauris lobortis. Sed et lacus eget velit
-							maximus iaculis. Donec a sapien enim. Cras molestie
-							condimentum dui, vel iaculis mauris hendrerit at.
-						</p>
-					</div>
-					<div class="model-card">
-						<h3 class="model-title">Model 2</h3>
-						<p class="model-description">
-							Lorem ipsum dolor sit amet, consectetur adipiscing
-							elit. Nullam congue velit nec tellus ultrices, id
-							tincidunt mauris lobortis. Sed et lacus eget velit
-							maximus iaculis. Donec a sapien enim. Cras molestie
-							condimentum dui, vel iaculis mauris hendrerit at.
-						</p>
-					</div>
-				</div>
-			</div>
-		</section>
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="container">
+        <h2 class="section-title">Features</h2>
+        <div class="features-container">
+          <div class="feature-card">
+            <h3 class="feature-title orange">Crop Recommendation</h3>
+            <p class="feature-description">
+				All the necessary input values are taken from the user in a form on the user interface. The values are processed and the output is recommended as a suitable crop for those data values. As of now the model could achieve an <span class="orange">accuracy of 96%</span>.	
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3 class="feature-title orange">Disease Detection</h3>
+            <p class="feature-description">
+				An image is taken as an input from the user. This image is processed by the CNN technique and an output is produced that specifies the probable disease in the plant. The model can probably achieve an <span class="orange">accuracy of 90%</span>.			
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3 class="feature-title orange">Adaptive Learning</h3>
+            <p class="feature-description">
+				Dynamic model updates for improved accuracy and relevance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-		<footer>
-			<div class="footer-container">
-				<div class="footer-left">
-					<p>PlantLyf</p>
-				</div>
-				<div class="footer-center">
-					<p>&copy; 2023 PlantLyf. All rights reserved.</p>
-				</div>
-				<div class="footer-right">
-					<a href="/github">GitHub</a>
-					<a href="/team">Team</a>
-				</div>
-			</div>
-		</footer>
+    <!-- Model Accuracy Section -->
+    <section class="model-accuracy">
+      <div class="container">
+        <h2 class="section-title">Model Accuracy</h2>
+        <div class="model-container">
+          <div class="model-card">
+            <h3 class="model-title orange">Random Forest Algorithm</h3>
+            <p class="model-description">
+				Random Forest Algorithm takes less training time as compared to other algorithms. It predicts output with high accuracy, even for the large dataset it runs efficiently. Random Forest Algorithm can also maintain accuracy when a large proportion of data is missing.				
+            </p>
+          </div>
+          <div class="model-card">
+            <h3 class="model-title orange">Convolutional Neural Network</h3>
+            <p class="model-description">
+				CNN leverages hierarchical pattern recognition, allowing them to automatically learn and extract features directly from raw pixel data, eliminating the need for manual feature engineering. It preserves spatial relationships within images through the use of convolutional layers, enabling them to effectively capture local patterns and structures. 
 
-		<script src="script.js"></script>
-	</body>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-left">
+          <p>PlantLyf</p>
+        </div>
+        <div class="footer-center">
+          <p>&copy; 2023 PlantLyf. All rights reserved.</p>
+        </div>
+        <div class="footer-right">
+          <a href="/github">GitHub</a>
+          <a href="/team">Team</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>

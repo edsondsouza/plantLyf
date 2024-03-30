@@ -244,6 +244,7 @@ nav {
 .feature-title {
   font-size: 24px;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .feature-description {
@@ -301,7 +302,7 @@ nav {
 .model-title {
   font-size: 24px;
   margin-bottom: 10px;
-  color: #fff;
+  text-align: center;
 }
 
 .model-description {
@@ -315,6 +316,10 @@ nav {
   .model-card {
     width: 100%;
   }
+}
+
+.orange {
+  color: #e67e22;
 }
 
 /* Footer */
