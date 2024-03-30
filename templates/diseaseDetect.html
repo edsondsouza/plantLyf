@@ -1,46 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
+    <title>PlantLyf | Disease Detection</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Image Upload Form</title>
     <link rel="stylesheet" href="../static/css/diseaseDetect.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Disease Detection</h1>
-    <div class="container">
-      <form
-        action="/diseasedetection"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <h2>Upload Image</h2>
-        <div class="form-group">
-          <!-- image -->
-          <label for="image">Choose Image:</label>
-          <input type="file" id="image" name="image" accept="image/*" />
-
-          <!-- symptoms -->
-          <label for="text">Symptoms: </label>
-          <input type="text" id="symptoms" name="symptoms" />
-
-          <!-- crop name -->
-          <label for="text">Crop: </label>
-          <input type="text" id="crop" name="crop" />
+    <!-- navigation bar -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">
+          <a href="#">PlantLyf</a>
         </div>
-        <button type="submit" class="btn">Submit</button>
-      </form>
-    </div>
-    <h3>CNN model 1 prediction : {{prediction1}}</h3>
-    <br />
-    <!-- <h3>CNN model 2 prediction : {{ prediction2 }}</h3> -->
-    <!--not perfect-->
-    <h3>Large Language Model:</h3>
-    <br />
-    <ul>
-      {% for line in diseaseprediction %}
-      <li>{{ line }}</li>
-      {% endfor %}
-    </ul>
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#">Home</a>
+          <a href="/about">About</a>
+          <a href="/team">Team</a>
+          <a href="https://github.com/edsondsouza/plantLyf">GitHub</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- form -->
+    <form action="/disease_detection" method="post">
+      <h3 class="heading">Disease Detection</h3>
+      <label for="imageInput">Upload Image:</label>
+      <input
+        type="file"
+        id="imageInput"
+        name="imageInput"
+        accept="image/*"
+      /><br />
+
+      <label for="symptom">Symptoms:</label>
+      <input
+        type="text"
+        id="symptom"
+        name="symptom"
+        placeholder="Enter Symptoms found in Crop"
+      /><br />
+
+      <label for="crop">Crop:</label>
+      <input
+        type="text"
+        id="crop"
+        name="crop"
+        placeholder="Enter Crop Name"
+      /><br />
+
+      <input type="submit" value="Submit" />
+    </form>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-left">
+          <p>PlantLyf</p>
+        </div>
+        <div class="footer-center">
+          <p>&copy; 2024 PlantLyf. All rights reserved.</p>
+        </div>
+        <div class="footer-right">
+          <a href="https://github.com/edsondsouza/plantLyf">GitHub</a>
+          <a href="/team">Team</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
