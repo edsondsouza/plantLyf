@@ -3,91 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>plantLyf - RECOMMENDATION</title>
+    <title>PlantLyf - Crop Recommendation</title>
     <link rel="stylesheet" href="../static/css/plantRec.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Plant Prediction</h1>
+    <!-- navigation bar -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">
+          <a href="#">PlantLyf</a>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#">Home</a>
+          <a href="/about">About</a>
+          <a href="/team">Team</a>
+          <a href="/github">GitHub</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Form -->
     <form action="/croprecommendation" method="post">
-      <label for="leaf_width"> N :</label>
+      <h3 class="heading">Crop Recommendation</h3>
+
+      <label for="nitrogen">Nitrogen:</label>
       <input
         type="text"
-        id="leaf_width"
-        name="N"
+        id="nitrogen"
+        name="nitrogen"
         placeholder="Enter Nitrogen Ratio"
-        required
-      /><br /><br />
+      /><br />
 
-      <label for="leaf_length"> P :</label>
+      <label for="phosphorus">Phosphorus:</label>
       <input
         type="text"
-        id="leaf_length"
-        name="P"
-        placeholder="Enter P Ratio"
-        required
-      /><br /><br />
+        id="phosphorus"
+        name="phosphorus"
+        placeholder="Enter Phosphorus Ratio"
+      /><br />
 
-      <label for="color_intensity"> K :</label>
+      <label for="potassium">Potassium:</label>
       <input
         type="text"
-        id="color_intensity"
-        name="K"
-        placeholder="Enter N Ratio"
-        required
-      /><br /><br />
+        id="potassium"
+        name="potassium"
+        placeholder="Enter Potassium Ratio"
+      /><br />
 
-      <label for="temperature"> temperature :</label>
+      <label for="temperature">Temperature:</label>
       <input
         type="text"
         id="temperature"
         name="temperature"
-        placeholder="Enter temperature"
-        required
-      /><br /><br />
+        placeholder="Enter Temperature Value"
+      /><br />
 
-      <label for="humidity"> humidity :</label>
+      <label for="humidity">Humidity:</label>
       <input
         type="text"
         id="humidity"
         name="humidity"
-        placeholder="Enter humidity"
-        required
-      /><br /><br />
+        placeholder="Enter Humidity Value"
+      /><br />
 
-      <label for="ph"> ph :</label>
-      <input
-        type="text"
-        id="ph"
-        name="ph"
-        placeholder="Enter ph"
-        required
-      /><br /><br />
+      <label for="ph">ph:</label>
+      <input type="text" id="ph" name="ph" placeholder="Enter ph Ratio" /><br />
 
-      <label for="rainfall"> rainfall :</label>
+      <label for="rainfall">Rainfall:</label>
       <input
         type="text"
         id="rainfall"
         name="rainfall"
-        placeholder="Enter rainfall in mm"
-        required
-      /><br /><br />
+        placeholder="Enter Rainfall Value"
+      /><br />
 
-      <label for="rainfall"> Input any state or ask doubt : </label>
+      <label for="rainfall">Input State or Ask Any Doubts:</label>
       <input
         type="text"
-        id="doubt"
+        id="rainfall"
         name="doubt"
-        placeholder="Ask anything"
-        required
-      /><br /><br />
+        placeholder="Enter Additional Information"
+      /><br />
 
       <input type="submit" value="Predict" />
     </form>
+    <!-- Output -->
     <h3 class="prediction">Predicted Crop: {{ pre }}</h3>
     <ul>
       {% for line in prediction %}
-        <li>{{ line }}</li>
+      <li>{{ line }}</li>
       {% endfor %}
     </ul>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-left">
+          <p>PlantLyf</p>
+        </div>
+        <div class="footer-center">
+          <p>&copy; 2024 PlantLyf. All rights reserved.</p>
+        </div>
+        <div class="footer-right">
+          <a href="/github">GitHub</a>
+          <a href="/team">Team</a>
+        </div>
+      </div>
+    </footer>
   </body>
+  <script src="../static/js/plantRec.js"></script>
 </html>
