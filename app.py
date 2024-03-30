@@ -6,8 +6,9 @@ from keras.models  import load_model
 import google.generativeai as genai
 import re
 import tensorflow as tf
+import config
 
-GOOGLE_API_KEY = 'AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU'
+GOOGLE_API_KEY = config.api_key
 genai.configure(api_key=GOOGLE_API_KEY)
 Gmodel = genai.GenerativeModel('gemini-pro')
 global clearLines
@@ -134,10 +135,10 @@ def detection():
 def predict_disease():
     if request.method == "POST":
         if request.files:
-            symptoms = request.form.get("symptoms")
+            symptoms = request.form.get("symptom")
             crop = request.form.get("crop")
 
-            image = request.files["image"].read()
+            image = request.files["imageInput"].read()
             nparr = np.frombuffer(image, np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
@@ -173,9 +174,9 @@ def recomendation():
 @app.route('/croprecommendation', methods=['POST'])
 def predict_crops():
   if request.method == 'POST':
-    N = float(request.form['N'])
-    P = float(request.form['P'])
-    K = float(request.form['K'])
+    N = float(request.form['nitrogen'])
+    P = float(request.form['phosphorus'])
+    K = float(request.form['potassium'])
     temperature = float(request.form['temperature'])
     humidity = float(request.form['humidity'])
     ph = float(request.form['ph'])
