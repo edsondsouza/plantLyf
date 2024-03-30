@@ -6,9 +6,10 @@ from keras.models  import load_model
 import google.generativeai as genai
 import re
 import tensorflow as tf
+from googlesearch import search
 import config
 
-GOOGLE_API_KEY = config.api_key
+GOOGLE_API_KEY = "AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU"
 genai.configure(api_key=GOOGLE_API_KEY)
 Gmodel = genai.GenerativeModel('gemini-pro')
 global clearLines
@@ -165,7 +166,9 @@ def predict_disease():
                 # Clean each line using regular expression
                 clearLines = [re.sub(r"[^\w\s\!\?\.\,]", "", line) for line in lines]
 
-    return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines)
+                goole_search_results = search(prompt,num=5)
+
+    return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines,links=goole_search_results)
 
 @app.route('/recommendation')
 def recomendation():
