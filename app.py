@@ -2,14 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import numpy as np
 import pickle
 import cv2
-from keras.src.saving import load_model
+from keras.models  import load_model
 import google.generativeai as genai
 import re
 import tensorflow as tf
-from googlesearch import search
+import config
 
-
-GOOGLE_API_KEY = 'AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU'
+GOOGLE_API_KEY = config.api_key
 genai.configure(api_key=GOOGLE_API_KEY)
 Gmodel = genai.GenerativeModel('gemini-pro')
 global clearLines
@@ -136,7 +135,7 @@ def detection():
 def predict_disease():
     if request.method == "POST":
         if request.files:
-            symptoms = request.form.get("Symptoms")
+            symptoms = request.form.get("symptom")
             crop = request.form.get("crop")
 
             image = request.files["imageInput"].read()
@@ -165,9 +164,6 @@ def predict_disease():
 
                 # Clean each line using regular expression
                 clearLines = [re.sub(r"[^\w\s\!\?\.\,]", "", line) for line in lines]
-
-                # google_search_links = list(search(prompt,num_results=5))
-    
 
     return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines)
 
