@@ -91,21 +91,22 @@
       <label for="rainfall">Input State or Ask Any Doubts:</label>
       <input
         type="text"
-        id="rainfall"
-        name="rainfall"
+        id="doubt"
+        name="doubt"
         placeholder="Enter Additional Information"
       /><br />
 
       <button type="submit" class="submitButton">Submit</button>
     </form>
     <!-- Output -->
+    {% if pre %}
     <h3 class="prediction hidden">Predicted Crop: {{ pre }}</h3>
     <ul class="hidden">
       {% for line in prediction %}
       <li>{{ line }}</li>
       {% endfor %}
     </ul>
-
+    {% endif %}
     <!-- Footer Section -->
     <footer>
       <div class="footer-container">

@@ -6,9 +6,10 @@ from keras.models  import load_model
 import google.generativeai as genai
 import re
 import tensorflow as tf
+from googlesearch import search
 import config
 
-GOOGLE_API_KEY = config.generative_ai_api_key
+GOOGLE_API_KEY = "AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU"
 genai.configure(api_key=GOOGLE_API_KEY)
 Gmodel = genai.GenerativeModel('gemini-pro')
 global clearLines
@@ -135,10 +136,10 @@ def detection():
 def predict_disease():
     if request.method == "POST":
         if request.files:
-            symptoms = request.form.get("symptoms")
+            symptoms = request.form.get("symptom")
             crop = request.form.get("crop")
 
-            image = request.files["image"].read()
+            image = request.files["imageInput"].read()
             nparr = np.frombuffer(image, np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
@@ -165,7 +166,9 @@ def predict_disease():
                 # Clean each line using regular expression
                 clearLines = [re.sub(r"[^\w\s\!\?\.\,]", "", line) for line in lines]
 
-    return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines)
+                goole_search_results = search(prompt,num=5)
+
+    return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines,links=goole_search_results)
 
 @app.route('/recommendation')
 def recomendation():
@@ -174,9 +177,9 @@ def recomendation():
 @app.route('/croprecommendation', methods=['POST'])
 def predict_crops():
   if request.method == 'POST':
-    N = float(request.form['N'])
-    P = float(request.form['P'])
-    K = float(request.form['K'])
+    N = float(request.form['nitrogen'])
+    P = float(request.form['phosphorus'])
+    K = float(request.form['potassium'])
     temperature = float(request.form['temperature'])
     humidity = float(request.form['humidity'])
     ph = float(request.form['ph'])
