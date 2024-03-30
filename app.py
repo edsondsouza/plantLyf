@@ -6,8 +6,9 @@ from keras.models  import load_model
 import google.generativeai as genai
 import re
 import tensorflow as tf
+import config
 
-GOOGLE_API_KEY = 'AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU'
+GOOGLE_API_KEY = config.generative_ai_api_key
 genai.configure(api_key=GOOGLE_API_KEY)
 Gmodel = genai.GenerativeModel('gemini-pro')
 global clearLines
