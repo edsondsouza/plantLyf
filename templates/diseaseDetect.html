@@ -66,7 +66,7 @@
 
       <button type="submit" class="btn">Submit</button>
     </form>
-
+    {% if prediction1 %}
     <h3>CNN model 1 prediction : {{prediction1}}</h3>
     <br />
     <!-- <h3>CNN model 2 prediction : {{ prediction2 }}</h3> -->
@@ -84,6 +84,7 @@
           <li><a href="{{ link }}">{{ link }}</a></li>
       {% endfor %}
       </ul>
+    {% endif %}  
 
     <!-- Footer Section -->
     <footer>

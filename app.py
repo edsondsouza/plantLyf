@@ -9,7 +9,7 @@ import tensorflow as tf
 from googlesearch import search
 import config
 
-GOOGLE_API_KEY = "AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU"
+GOOGLE_API_KEY = config.generative_ai_api_key
 genai.configure(api_key=GOOGLE_API_KEY)
 Gmodel = genai.GenerativeModel('gemini-pro')
 global clearLines
@@ -166,9 +166,9 @@ def predict_disease():
                 # Clean each line using regular expression
                 clearLines = [re.sub(r"[^\w\s\!\?\.\,]", "", line) for line in lines]
 
-                goole_search_results = search(prompt,num=5)
+                google_search_results = search(prompt)
 
-    return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines,links=goole_search_results)
+    return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines,links=google_search_results)
 
 @app.route('/recommendation')
 def recomendation():
