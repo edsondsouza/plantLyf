@@ -2,12 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import numpy as np
 import pickle
 import cv2
-from keras.src.saving import load_model
+from keras.models  import load_model
 import google.generativeai as genai
 import re
 import tensorflow as tf
-from googlesearch import search
-
 
 GOOGLE_API_KEY = 'AIzaSyCB6FzLSYiuhOxJOxMC6C4UnB8DkwxwNFU'
 genai.configure(api_key=GOOGLE_API_KEY)
@@ -136,10 +134,10 @@ def detection():
 def predict_disease():
     if request.method == "POST":
         if request.files:
-            symptoms = request.form.get("Symptoms")
+            symptoms = request.form.get("symptoms")
             crop = request.form.get("crop")
 
-            image = request.files["imageInput"].read()
+            image = request.files["image"].read()
             nparr = np.frombuffer(image, np.uint8)
             img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
@@ -166,9 +164,6 @@ def predict_disease():
                 # Clean each line using regular expression
                 clearLines = [re.sub(r"[^\w\s\!\?\.\,]", "", line) for line in lines]
 
-                # google_search_links = list(search(prompt,num_results=5))
-    
-
     return render_template('diseaseDetect.html', prediction1=label, diseaseprediction=clearLines)
 
 @app.route('/recommendation')
@@ -178,9 +173,9 @@ def recomendation():
 @app.route('/croprecommendation', methods=['POST'])
 def predict_crops():
   if request.method == 'POST':
-    N = float(request.form['nitrogen'])
-    P = float(request.form['phosphorus'])
-    K = float(request.form['potassium'])
+    N = float(request.form['N'])
+    P = float(request.form['P'])
+    K = float(request.form['K'])
     temperature = float(request.form['temperature'])
     humidity = float(request.form['humidity'])
     ph = float(request.form['ph'])
